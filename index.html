@@ -12,8 +12,8 @@
 </head>
 <body>
   <div id="controls">
-    <input id="apiKey" placeholder="PUT_YOUR_GOOGLE_MAPS_API_KEY" style="width:260px"><br>
-    <button id="loadMap">Load map</button>
+    <!-- API key baked into page — visitors do not need to enter a key -->
+<input id="apiKey" value="(key embedded in page)" style="width:260px" readonly><br>
     <button id="exportPNG">Export PNG</button>
     <small>Click any marker to see details. This demo uses geometry & spiderfier libs.</small>
   </div>
@@ -36,15 +36,9 @@
 
   let map, oms, markers = [], polylines = [];
 
-  document.getElementById('loadMap').addEventListener('click', ()=>{
-    const key = document.getElementById('apiKey').value.trim();
-    if(!key){alert('Paste your Google Maps JS API key in the box');return}
-    // dynamically load Google Maps JS with geometry library
-    const s = document.createElement('script');
-    s.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=geometry&callback=initMap`;
-    s.defer = true; s.async = true;
-    document.head.appendChild(s);
-  });
+  <!-- Auto-load Google Maps JS (replace YOUR_API_KEY with the real key) -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLVYdfU484tdZ3XeaaUnY45uP_ctAmQ3M&libraries=geometry&callback=initMap"></script>
+
 
   function initMap(){
     map = new google.maps.Map(document.getElementById('map'),{
